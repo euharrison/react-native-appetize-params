@@ -4,15 +4,18 @@ import { StyleSheet, View, Text } from 'react-native';
 import AppetizeParams from 'react-native-appetize-params';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [isAppetize, setIsAppetize] = React.useState<boolean>(false);
+  const [foo, setFoo] = React.useState<string>('');
 
   React.useEffect(() => {
-    AppetizeParams.multiply(3, 7).then(setResult);
+    AppetizeParams.isAppetize().then(setIsAppetize);
+    AppetizeParams.get('foo').then(setFoo);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>isAppetize: {String(isAppetize)}</Text>
+      <Text>foo: {foo}</Text>
     </View>
   );
 }

@@ -1,9 +1,16 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, Platform, Settings } from 'react-native';
 
 type AppetizeParamsType = {
-  multiply(a: number, b: number): Promise<number>;
+  get: (key: string) => Promise<string>;
+  isAppetize: () => Promise<boolean>;
 };
 
-const { AppetizeParams } = NativeModules;
+const AppetizeIOS = {
+  get: (key: string) => Promise.resolve(Settings.get(key)),
+  isAppetize: () => Promise.resolve(Settings.get('isAppetize')),
+};
+
+const AppetizeParams =
+  Platform.OS === 'ios' ? AppetizeIOS : NativeModules.AppetizeParams;
 
 export default AppetizeParams as AppetizeParamsType;
