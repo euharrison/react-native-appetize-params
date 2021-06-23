@@ -2,6 +2,8 @@
 
 Get query parameters from url when runing in Appetize environment
 
+Ref: https://docs.appetize.io/core-features/playback-options
+
 ## Installation
 
 ```sh
@@ -15,7 +17,9 @@ import AppetizeParams from "react-native-appetize-params";
 
 // ...
 
-const result = await AppetizeParams.multiply(3, 7);
+const isAppetize = await AppetizeParams.isAppetize();
+const foo = await AppetizeParams.get('foo');
+
 ```
 
 ## Contributing
